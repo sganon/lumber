@@ -13,6 +13,9 @@
 ### Fixed
 - Command Generate - Avoid to crash if there's a conflict on the project name.
 
+### Fixed
+- Command Update - Environment variables are now read in from the .env file if the file exists.
+
 ## Release 1.14.1
 ### Fixed
 - Command Update - Add the 'ssl' prompt option.
