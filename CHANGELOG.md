@@ -7,6 +7,7 @@
 ### Changed
 - Technical - Rename environment variable SERVER_HOST to FOREST_URL.
 - Opn - Completely remove the opn NPM package.
+- Dependencies - Fix vulnerabilities by upgrading dependencies in the package.json.
 
 ## Release 1.14.2
 ### Fixed
