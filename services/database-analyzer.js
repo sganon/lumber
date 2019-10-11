@@ -100,7 +100,7 @@ function DatabaseAnalyzer(databaseConnection, config, allowWarning) {
             //         handle it automatically without necessary declaration.
             if (!(nameColumn === 'id' && type === 'INTEGER' && columnInfo.primaryKey)) {
               const field = {
-                name: _.camelCase(nameColumn),
+                name: nameColumn,
                 nameColumn,
                 type,
                 primaryKey: columnInfo.primaryKey,
