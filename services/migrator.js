@@ -6,10 +6,11 @@ const logger = require('./logger');
 
 function Migrator(config) {
   this.createModel = (schema, table) => {
-    const modelPath = `${config.sourceDirectory}/models/${table}.js`;
+    const ext = config.typescript ? 'ts' : 'js';
+    const modelPath = `${config.sourceDirectory}/models/${table}.${ext}`;
     const { fields, references, options } = schema[table];
 
-    const templatePath = `${__dirname}/../templates/model.txt`;
+    const templatePath = config.typescript ? `${__dirname}/../templates/model_ts.txt` : `${__dirname}/../templates/model.txt`;
     const template = _.template(fs.readFileSync(templatePath, 'utf-8'));
 
     const text = template({
@@ -27,7 +28,8 @@ function Migrator(config) {
   };
 
   this.createField = (table, field) => {
-    const modelPath = `${config.sourceDirectory}/models/${table}.js`;
+    const ext = config.typescript ? 'ts' : 'js';
+    const modelPath = `${config.sourceDirectory}/models/${table}.${ext}`;
 
     const templatePath = `${__dirname}/../templates/migrate/field-extend.txt`;
     const template = _.template(fs.readFileSync(templatePath, 'utf-8'));
@@ -62,8 +64,9 @@ automatically. Please, add it manually to the file '${modelPath}'.`));
       process.exit(1);
     }
 
+    const ext = config.typescript ? 'ts' : 'js';
     await P.each(Object.keys(schema), async (table) => {
-      const modelPath = `${config.sourceDirectory}/models/${table}.js`;
+      const modelPath = `${config.sourceDirectory}/models/${table}.${ext}`;
       if (!fs.existsSync(modelPath)) {
         newTables.push(table);
       }
@@ -75,9 +78,10 @@ automatically. Please, add it manually to the file '${modelPath}'.`));
   this.detectNewFields = async (schema) => {
     const newFields = {};
 
+    const ext = config.typescript ? 'ts' : 'js';
     await P.each(Object.keys(schema), async (table) => {
       newFields[table] = [];
-      const modelPath = `${config.sourceDirectory}/models/${table}.js`;
+      const modelPath = `${config.sourceDirectory}/models/${table}.${ext}`;
       const content = fs.readFileSync(modelPath, 'utf-8');
 
       await P.each(schema[table].fields, (field) => {
