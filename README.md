@@ -6,6 +6,12 @@
   <img src="https://github.com/ForestAdmin/lumber/blob/master/assets/lumber-logo.png?raw=true" alt="Lumber logo">
 </p>
 
+## Fork purpose
+
+This is a fork of [forestadmin/lumber](https://github.com/ForestAdmin/lumber) it has been modified to be able to use `lumber update` with blueboard's bb_forest structure. You can use `lumber update -t` to generate/update typescript models.
+
+-----
+
 Lumber is a CLI tool that helps you create your backend application in minutes.
 At its core, Lumber has been designed with a modular architecture that leverages a set of plugins.
 
